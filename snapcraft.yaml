@@ -1,0 +1,79 @@
+name: easycwmp
+version: 1.2.7
+vendor: PIVA Software <mohamed.kallel@pivasoftware.com>
+summary: TR069 cwmp client open source
+description: Implementation of the TR069 cwmp standard
+icon: easycwmp.png
+
+parts:
+  ubus:
+    plugin: cmake
+    source: git://github.com/pivasoftware/snappy-easycwmp-ubus.git
+    configflags: 
+      - -DBUILD_LUA=OFF
+  uci:
+    plugin: cmake
+    source: git://github.com/pivasoftware/snappy-easycwmp-uci.git
+    configflags: 
+      - -DBUILD_LUA=OFF
+  libubox:
+    plugin: cmake
+    source: git://github.com/pivasoftware/snappy-easycwmp-libubox.git
+    after:
+      - json-c
+    configflags: 
+      - -DBUILD_LUA=OFF
+      - --debug-output
+  json-c:
+    plugin: autotools
+    source: git://github.com/pivasoftware/snappy-easycwmp-json-c.git
+    configflags: 
+      - --prefix=/usr
+  microxml:
+    plugin: autotools
+    source: git://github.com/pivasoftware/snappy-easycwmp-microxml.git
+    configflags: 
+      - --prefix=/usr
+      - --enable-threads
+      - --enable-shared
+      - --enable-static
+  libcurl:
+    plugin: autotools
+    source: git://github.com/pivasoftware/snappy-easycwmp-libcurl.git
+    configflags: 
+    - --disable-dependency-tracking 
+    - --enable-ipv6 
+    - --disable-ftp 
+    - --disable-file 
+    - --disable-ldap 
+    - --disable-ldaps 
+    - --disable-rtsp 
+    - --disable-proxy 
+    - --disable-dict 
+    - --disable-telnet 
+    - --disable-tftp 
+    - --disable-pop3 
+    - --disable-imap 
+    - --disable-smtp 
+    - --disable-gopher 
+    - --disable-sspi 
+    - --disable-manual 
+    - --disable-zlib 
+    - --without-zlib 
+    - --disable-ssl
+    - --without-ssl 
+    - --prefix=/usr
+  easycwmp:
+    plugin: autotools
+    source: git://github.com/pivasoftware/snappy-easycwmp-easycwmp.git
+    after:
+      - ubus
+      - json-c
+      - microxml
+      - uci
+      - libubox
+      - libcurl
+    configflags: 
+      - --enable-debug
+      - --enable-devel
+      - --enable-jsonc=1
