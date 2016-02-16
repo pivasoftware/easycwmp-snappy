@@ -1,0 +1,1 @@
+# easycwmp-snappy
