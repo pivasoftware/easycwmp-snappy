@@ -9,11 +9,15 @@ parts:
   ubus:
     plugin: cmake
     source: git://github.com/pivasoftware/snappy-easycwmp-ubus.git
+    after:
+      - libubox
     configflags: 
       - -DBUILD_LUA=OFF
   uci:
     plugin: cmake
     source: git://github.com/pivasoftware/snappy-easycwmp-uci.git
+    after:
+      - libubox
     configflags: 
       - -DBUILD_LUA=OFF
   libubox:
