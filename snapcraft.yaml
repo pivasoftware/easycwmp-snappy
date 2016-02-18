@@ -81,3 +81,15 @@ parts:
       - --enable-debug
       - --enable-devel
       - --enable-jsonc=1
+
+services:
+  ubusd:
+    start: sbin/ubusd
+    caps:
+      - networking
+      - network-service
+  easycwmpd:
+    start: bin/easycwmpd
+    caps:
+      - networking
+      - network-service
