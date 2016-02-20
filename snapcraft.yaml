@@ -85,11 +85,13 @@ parts:
 services:
   ubusd:
     start: sbin/ubusd
+    security-template: unconfined
     caps:
       - networking
       - network-service
   easycwmpd:
     start: bin/easycwmpd
+    security-template: unconfined
     caps:
       - networking
       - network-service
